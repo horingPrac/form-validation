@@ -91,6 +91,28 @@ class App extends Component {
     if(phoneNumberEntered) return isPhoneNumberValid;
   };
 
+
+  isEveryFieldValid = () => {
+    const {isNameValid, isEmailValid, isPhoneNumberValid} = this.state;
+    return isNameValid && isEmailValid && isPhoneNumberValid;
+  };
+
+  renderSubmitBtn = () => {
+    if(this.isEveryFieldValid()){
+      return (
+        <button type="submit" className="btn btn-primary btn-block">
+          Submit
+        </button>
+      );
+    }else{
+      return (
+        <button type="submit" className="btn btn-primary btn-block" disabled>
+          Submit
+        </button>
+      );
+    }
+  }
+
   render(){
     return(
       <div className="App">
@@ -129,9 +151,7 @@ class App extends Component {
               required
             />  
           </div>
-          <button type="submit" className="btn btn-primary btn-block">
-            Submit
-          </button>
+          {this.renderSubmitBtn()}
         </form>
       </div>
     );
